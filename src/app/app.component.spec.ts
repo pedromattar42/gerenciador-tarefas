@@ -3,14 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/components/header/header.component';
-
-@Component({
-  selector: 'app-header',
-  template: '',
-  standalone: true,
-})
-class FakeHeaderComponent {}
-
+import { FakeHeaderComponent } from './testing/mocks/fake-header.component';
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
