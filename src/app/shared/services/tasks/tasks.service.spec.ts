@@ -28,7 +28,7 @@ describe('TasksService', () => {
       result = tasks;
     });
 
-    const request = httpClientTesting.expectOne('/tasks');
+    const request = httpClientTesting.expectOne('/api/tasks');
     const fakeTasks = [
       { title: 'Tarefa 1', isCompleted: false },
       { title: 'Tarefa 2', isCompleted: false },
