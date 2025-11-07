@@ -1,10 +1,7 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-interface Task {
-  title: string;
-  isCompleted: boolean;
-}
+import { Task } from 'src/app/shared/interfaces/task.interface';
+import { TasksService } from 'src/app/shared/services/tasks/tasks.service';
 
 @Component({
   selector: 'app-list',
@@ -13,16 +10,16 @@ interface Task {
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
 })
-export class ListComponent {
-  tasks = signal<Task[]>([
-    { title: 'Tarefa 1', isCompleted: false },
-    { title: 'Tarefa 2', isCompleted: false },
-    { title: 'Tarefa 3', isCompleted: false },
-    { title: 'Tarefa 4', isCompleted: true },
-    { title: 'Tarefa 5', isCompleted: true },
-    { title: 'Tarefa 6', isCompleted: true },
-  ])
+export class ListComponent implements OnInit {
+  taskService = inject(TasksService);
+  tasks = signal<Task[]>([])
   completedTasks = computed(() => this.tasks().filter((task) => task.isCompleted))
   pendingTasks = computed(() => this.tasks().filter((task) => !task.isCompleted))
+
+  ngOnInit() {
+    this.taskService.getAll().subscribe((tasks) => {
+      this.tasks.set(tasks);
+    });
+  }
 
 }
