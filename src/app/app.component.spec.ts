@@ -1,15 +1,44 @@
+import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { RouterTestingModule } from '@angular/router/testing';
+import { HeaderComponent } from './shared/components/header/header.component';
+
+@Component({
+  selector: 'app-header',
+  template: '',
+  standalone: true,
+})
+class FakeHeaderComponent {}
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent, RouterTestingModule],
+      imports: [AppComponent],
     }).compileComponents();
+
+    TestBed.overrideComponent(AppComponent, {
+      remove: {
+        imports: [HeaderComponent],
+      },
+      add: {
+        imports: [FakeHeaderComponent],
+      },
+    });
   });
 
-  it('should render title', () => {
+  it('deve renderizar o componente header', () => {
     const fixture = TestBed.createComponent(AppComponent);
+
+    const headerDebugEl = fixture.debugElement.query(By.css('app-header'));
+
+    expect(headerDebugEl).toBeTruthy();
+  });
+
+  it('deve renderizar o componente router-outlet', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+
+    const routerOutletDebugEl = fixture.debugElement.query(By.css('router-outlet'));
+    expect(routerOutletDebugEl).toBeTruthy();
   });
 });
