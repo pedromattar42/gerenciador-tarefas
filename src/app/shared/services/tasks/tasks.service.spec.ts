@@ -28,7 +28,7 @@ describe('TasksService', () => {
       result = tasks;
     });
 
-    const request = httpClientTesting.expectOne('http://localhost:3000/tasks');
+    const request = httpClientTesting.expectOne('/tasks');
     const fakeTasks = [
       { title: 'Tarefa 1', isCompleted: false },
       { title: 'Tarefa 2', isCompleted: false },
