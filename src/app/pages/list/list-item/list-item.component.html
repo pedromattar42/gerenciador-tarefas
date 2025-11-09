@@ -3,5 +3,14 @@
     <h2 class="card-title" data-testid="list-item-task-title">
       {{ task().title }}
     </h2>
+    <div class="card-actions justify-end w-full">
+      <button
+        class="btn btn-primary btn-xs"
+        data-testid="list-item-complete-action"
+        (click)="onComplete()"
+      >
+        Completar
+      </button>
+    </div>
   </div>
 </div>
