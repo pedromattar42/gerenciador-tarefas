@@ -24,4 +24,13 @@ export class ListComponent implements OnInit {
     });
   }
 
+  onComplete(task: Task) {
+    this.taskService.patch(task.id, { isCompleted: true }).subscribe((task) => {
+      this.updateTask(task);
+    });
+  }
+
+  private updateTask(task: Task) {
+    this.tasks.update((tasks) => tasks.map((t) => t.id === task.id ? task : t))
+  }
 }
