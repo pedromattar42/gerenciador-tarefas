@@ -9,6 +9,9 @@ import { Task } from 'src/app/shared/interfaces/task.interface';
 })
 export class FakeListItemComponent implements ListItemComponent {
   complete = output<Task>();
-  onComplete(): void {}
+  notComplete = output<Task>();
   task = input.required<Task>();
+
+  onComplete(): void {}
+  onMarkAsPending(): void {}
 }
